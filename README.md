@@ -1,5 +1,5 @@
 # Medicare
-# 🏥 MEDICARE – Smart Healthcare Management System
+# 🏥 MEDICARE
 
 **MEDICARE** is a smart healthcare management platform designed to simplify healthcare services by connecting patients, doctors, and administrators through a single digital system.
 
