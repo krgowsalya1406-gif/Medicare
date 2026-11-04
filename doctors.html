@@ -1,0 +1,1334 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediCare - Doctors</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f8f8;
+    color:#243333;
+}
+
+/* NAVBAR */
+
+.navbar{
+    height:70px;
+    background:#fff;
+    border-bottom:1px solid #e1eaea;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 5%;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#087f7b;
+    font-size:23px;
+    font-weight:bold;
+}
+
+.logo-icon{
+    width:38px;
+    height:38px;
+    background:#087f7b;
+    color:white;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#657373;
+    font-size:14px;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+    color:#087f7b;
+    font-weight:bold;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.notification{
+    width:38px;
+    height:38px;
+    background:#edf8f7;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+
+.profile-btn{
+    border:none;
+    background:#087f7b;
+    color:white;
+    padding:10px 16px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* MAIN */
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:35px auto;
+}
+
+.heading{
+    margin-bottom:25px;
+}
+
+.heading h1{
+    font-size:30px;
+    margin-bottom:7px;
+    color:#193333;
+}
+
+.heading p{
+    color:#7a8888;
+    font-size:14px;
+}
+
+/* SEARCH */
+
+.search-area{
+    background:white;
+    border:1px solid #e1eaea;
+    border-radius:12px;
+    padding:18px;
+    display:flex;
+    gap:12px;
+    margin-bottom:28px;
+}
+
+.search{
+    flex:1;
+}
+
+.search input,
+.search-area select{
+    width:100%;
+    height:43px;
+    border:1px solid #dce6e6;
+    border-radius:8px;
+    padding:0 13px;
+    outline:none;
+    color:#526060;
+}
+
+.search input:focus,
+.search-area select:focus{
+    border-color:#087f7b;
+}
+
+.search-area select{
+    width:200px;
+}
+
+/* DOCTOR GRID */
+
+.doctor-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.doctor-card{
+    background:white;
+    border:1px solid #e1eaea;
+    border-radius:14px;
+    padding:22px;
+    transition:.25s;
+}
+
+.doctor-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,80,80,.08);
+}
+
+.doctor-top{
+    display:flex;
+    gap:14px;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.doctor-avatar{
+    width:62px;
+    height:62px;
+    border-radius:50%;
+    background:#e3f6f4;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:29px;
+}
+
+.doctor-info h3{
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+.doctor-info p{
+    color:#778686;
+    font-size:12px;
+}
+
+.rating{
+    margin-top:5px;
+    color:#e7a72b;
+    font-size:12px;
+}
+
+.specialization{
+    background:#f0f8f7;
+    color:#087f7b;
+    padding:7px 10px;
+    border-radius:7px;
+    font-size:12px;
+    display:inline-block;
+    margin-bottom:15px;
+}
+
+.doctor-details{
+    border-top:1px solid #edf2f2;
+    padding-top:15px;
+    margin-bottom:16px;
+}
+
+.detail-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+    font-size:12px;
+}
+
+.detail-row span{
+    color:#899696;
+}
+
+.detail-row strong{
+    color:#435353;
+}
+
+.available{
+    color:#1f914b!important;
+}
+
+.unavailable{
+    color:#c44b4b!important;
+}
+
+.card-buttons{
+    display:flex;
+    gap:8px;
+}
+
+.card-buttons button{
+    flex:1;
+    height:38px;
+    border-radius:7px;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.book-btn{
+    background:#087f7b;
+    color:white;
+    border:none;
+}
+
+.details-btn{
+    background:white;
+    border:1px solid #087f7b;
+    color:#087f7b;
+}
+
+/* EMPTY */
+
+.empty{
+    display:none;
+    background:white;
+    border:1px solid #e1eaea;
+    border-radius:12px;
+    padding:50px;
+    text-align:center;
+}
+
+.empty-icon{
+    font-size:40px;
+    margin-bottom:12px;
+}
+
+/* MODAL */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:2000;
+}
+
+.modal-box{
+    width:100%;
+    max-width:500px;
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    max-height:90vh;
+    overflow-y:auto;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+.modal-header h2{
+    font-size:21px;
+}
+
+.close{
+    border:none;
+    background:none;
+    font-size:26px;
+    cursor:pointer;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    height:43px;
+    border:1px solid #dce6e6;
+    border-radius:8px;
+    padding:0 12px;
+    outline:none;
+}
+
+.submit-btn{
+    width:100%;
+    height:44px;
+    border:none;
+    background:#087f7b;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#173b3a;
+    color:white;
+    padding:14px 18px;
+    border-radius:9px;
+    display:none;
+    z-index:3000;
+    font-size:13px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1050px){
+
+    .doctor-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .nav-links{
+        gap:14px;
+    }
+}
+
+@media(max-width:750px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .container{
+        width:92%;
+    }
+
+    .search-area{
+        flex-direction:column;
+    }
+
+    .search-area select{
+        width:100%;
+    }
+
+    .doctor-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        <div class="logo-icon">✚</div>
+        MediCare
+    </div>
+
+    <div class="nav-links">
+
+        <a href="dashboard.html">Dashboard</a>
+
+        <a href="appointments.html">
+            Appointments
+        </a>
+
+        <a href="doctors.html" class="active">
+            Doctors
+        </a>
+
+        <a href="records.html">
+            Records
+        </a>
+
+        <a href="prescriptions.html">
+            Prescriptions
+        </a>
+
+        <a href="lab-reports.html">
+            Lab Reports
+        </a>
+
+    </div>
+
+    <div class="nav-right">
+
+        <div class="notification"
+             onclick="showNotifications()">
+            🔔
+        </div>
+
+        <button class="profile-btn"
+                onclick="goProfile()">
+            👤 Profile
+        </button>
+
+    </div>
+
+</nav>
+
+
+<main class="container">
+
+    <div class="heading">
+        <h1>Find a Doctor</h1>
+        <p>Search and connect with the right doctor for your healthcare needs.</p>
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="search-area">
+
+        <div class="search">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search doctor or specialization..."
+                oninput="filterDoctors()">
+
+        </div>
+
+        <select id="specializationFilter"
+                onchange="filterDoctors()">
+
+            <option value="all">
+                All Specializations
+            </option>
+
+            <option value="cardiologist">
+                Cardiologist
+            </option>
+
+            <option value="general physician">
+                General Physician
+            </option>
+
+            <option value="dermatologist">
+                Dermatologist
+            </option>
+
+            <option value="neurologist">
+                Neurologist
+            </option>
+
+            <option value="pediatrician">
+                Pediatrician
+            </option>
+
+            <option value="orthopedic">
+                Orthopedic
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- DOCTORS -->
+
+    <div class="doctor-grid" id="doctorGrid">
+
+
+        <!-- DOCTOR 1 -->
+
+        <div class="doctor-card"
+             data-name="Dr. Priya Sharma"
+             data-specialization="cardiologist">
+
+            <div class="doctor-top">
+
+                <div class="doctor-avatar">
+                    👩‍⚕️
+                </div>
+
+                <div class="doctor-info">
+
+                    <h3>Dr. Priya Sharma</h3>
+
+                    <p>Cardiologist</p>
+
+                    <div class="rating">
+                        ★ 4.9
+                    </div>
+
+                </div>
+
+            </div>
+
+            <span class="specialization">
+                Heart & Cardiology
+            </span>
+
+            <div class="doctor-details">
+
+                <div class="detail-row">
+                    <span>Experience</span>
+                    <strong>12 Years</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Hospital</span>
+                    <strong>City Care Hospital</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Consultation</span>
+                    <strong>₹600</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Availability</span>
+                    <strong class="available">
+                        ● Available Today
+                    </strong>
+                </div>
+
+            </div>
+
+            <div class="card-buttons">
+
+                <button class="details-btn"
+                        onclick="viewDoctor('Dr. Priya Sharma','Cardiologist','12 Years','₹600')">
+                    Details
+                </button>
+
+                <button class="book-btn"
+                        onclick="bookDoctor('Dr. Priya Sharma','Cardiologist')">
+                    Book
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- DOCTOR 2 -->
+
+        <div class="doctor-card"
+             data-name="Dr. Arun Kumar"
+             data-specialization="general physician">
+
+            <div class="doctor-top">
+
+                <div class="doctor-avatar">
+                    👨‍⚕️
+                </div>
+
+                <div class="doctor-info">
+
+                    <h3>Dr. Arun Kumar</h3>
+
+                    <p>General Physician</p>
+
+                    <div class="rating">
+                        ★ 4.8
+                    </div>
+
+                </div>
+
+            </div>
+
+            <span class="specialization">
+                General Medicine
+            </span>
+
+            <div class="doctor-details">
+
+                <div class="detail-row">
+                    <span>Experience</span>
+                    <strong>10 Years</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Hospital</span>
+                    <strong>MediCare Hospital</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Consultation</span>
+                    <strong>₹400</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Availability</span>
+                    <strong class="available">
+                        ● Available Today
+                    </strong>
+                </div>
+
+            </div>
+
+            <div class="card-buttons">
+
+                <button class="details-btn"
+                        onclick="viewDoctor('Dr. Arun Kumar','General Physician','10 Years','₹400')">
+                    Details
+                </button>
+
+                <button class="book-btn"
+                        onclick="bookDoctor('Dr. Arun Kumar','General Physician')">
+                    Book
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- DOCTOR 3 -->
+
+        <div class="doctor-card"
+             data-name="Dr. Meena Raj"
+             data-specialization="dermatologist">
+
+            <div class="doctor-top">
+
+                <div class="doctor-avatar">
+                    👩‍⚕️
+                </div>
+
+                <div class="doctor-info">
+
+                    <h3>Dr. Meena Raj</h3>
+
+                    <p>Dermatologist</p>
+
+                    <div class="rating">
+                        ★ 4.7
+                    </div>
+
+                </div>
+
+            </div>
+
+            <span class="specialization">
+                Skin & Hair
+            </span>
+
+            <div class="doctor-details">
+
+                <div class="detail-row">
+                    <span>Experience</span>
+                    <strong>8 Years</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Hospital</span>
+                    <strong>Skin Care Center</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Consultation</span>
+                    <strong>₹500</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Availability</span>
+                    <strong class="available">
+                        ● Available Today
+                    </strong>
+                </div>
+
+            </div>
+
+            <div class="card-buttons">
+
+                <button class="details-btn"
+                        onclick="viewDoctor('Dr. Meena Raj','Dermatologist','8 Years','₹500')">
+                    Details
+                </button>
+
+                <button class="book-btn"
+                        onclick="bookDoctor('Dr. Meena Raj','Dermatologist')">
+                    Book
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- DOCTOR 4 -->
+
+        <div class="doctor-card"
+             data-name="Dr. Rahul Menon"
+             data-specialization="neurologist">
+
+            <div class="doctor-top">
+
+                <div class="doctor-avatar">
+                    👨‍⚕️
+                </div>
+
+                <div class="doctor-info">
+
+                    <h3>Dr. Rahul Menon</h3>
+
+                    <p>Neurologist</p>
+
+                    <div class="rating">
+                        ★ 4.9
+                    </div>
+
+                </div>
+
+            </div>
+
+            <span class="specialization">
+                Brain & Nerves
+            </span>
+
+            <div class="doctor-details">
+
+                <div class="detail-row">
+                    <span>Experience</span>
+                    <strong>15 Years</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Hospital</span>
+                    <strong>Neuro Care Hospital</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Consultation</span>
+                    <strong>₹800</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Availability</span>
+                    <strong class="available">
+                        ● Available Today
+                    </strong>
+                </div>
+
+            </div>
+
+            <div class="card-buttons">
+
+                <button class="details-btn"
+                        onclick="viewDoctor('Dr. Rahul Menon','Neurologist','15 Years','₹800')">
+                    Details
+                </button>
+
+                <button class="book-btn"
+                        onclick="bookDoctor('Dr. Rahul Menon','Neurologist')">
+                    Book
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- DOCTOR 5 -->
+
+        <div class="doctor-card"
+             data-name="Dr. Anitha Kumar"
+             data-specialization="pediatrician">
+
+            <div class="doctor-top">
+
+                <div class="doctor-avatar">
+                    👩‍⚕️
+                </div>
+
+                <div class="doctor-info">
+
+                    <h3>Dr. Anitha Kumar</h3>
+
+                    <p>Pediatrician</p>
+
+                    <div class="rating">
+                        ★ 4.8
+                    </div>
+
+                </div>
+
+            </div>
+
+            <span class="specialization">
+                Child Care
+            </span>
+
+            <div class="doctor-details">
+
+                <div class="detail-row">
+                    <span>Experience</span>
+                    <strong>9 Years</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Hospital</span>
+                    <strong>Mother & Child Hospital</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Consultation</span>
+                    <strong>₹450</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Availability</span>
+                    <strong class="available">
+                        ● Available Today
+                    </strong>
+                </div>
+
+            </div>
+
+            <div class="card-buttons">
+
+                <button class="details-btn"
+                        onclick="viewDoctor('Dr. Anitha Kumar','Pediatrician','9 Years','₹450')">
+                    Details
+                </button>
+
+                <button class="book-btn"
+                        onclick="bookDoctor('Dr. Anitha Kumar','Pediatrician')">
+                    Book
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- DOCTOR 6 -->
+
+        <div class="doctor-card"
+             data-name="Dr. Vikram Raj"
+             data-specialization="orthopedic">
+
+            <div class="doctor-top">
+
+                <div class="doctor-avatar">
+                    👨‍⚕️
+                </div>
+
+                <div class="doctor-info">
+
+                    <h3>Dr. Vikram Raj</h3>
+
+                    <p>Orthopedic</p>
+
+                    <div class="rating">
+                        ★ 4.6
+                    </div>
+
+                </div>
+
+            </div>
+
+            <span class="specialization">
+                Bones & Joints
+            </span>
+
+            <div class="doctor-details">
+
+                <div class="detail-row">
+                    <span>Experience</span>
+                    <strong>11 Years</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Hospital</span>
+                    <strong>Ortho Care Center</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Consultation</span>
+                    <strong>₹550</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Availability</span>
+                    <strong class="available">
+                        ● Available Today
+                    </strong>
+                </div>
+
+            </div>
+
+            <div class="card-buttons">
+
+                <button class="details-btn"
+                        onclick="viewDoctor('Dr. Vikram Raj','Orthopedic','11 Years','₹550')">
+                    Details
+                </button>
+
+                <button class="book-btn"
+                        onclick="bookDoctor('Dr. Vikram Raj','Orthopedic')">
+                    Book
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="empty" id="emptyMessage">
+
+        <div class="empty-icon">🔍</div>
+
+        <h3>No doctors found</h3>
+
+        <p>
+            Try another doctor name or specialization.
+        </p>
+
+    </div>
+
+</main>
+
+
+<!-- BOOKING MODAL -->
+
+<div class="modal" id="bookingModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>Book Appointment</h2>
+
+            <button class="close"
+                    onclick="closeModal()">
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Doctor</label>
+
+            <input
+                type="text"
+                id="selectedDoctor"
+                readonly>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Date</label>
+
+            <input
+                type="date"
+                id="appointmentDate">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Time</label>
+
+            <select id="appointmentTime">
+
+                <option value="">
+                    Select Time
+                </option>
+
+                <option>09:00 AM</option>
+                <option>10:00 AM</option>
+                <option>11:00 AM</option>
+                <option>02:00 PM</option>
+                <option>03:00 PM</option>
+                <option>04:00 PM</option>
+                <option>05:00 PM</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Consultation Type</label>
+
+            <select id="consultationType">
+
+                <option value="">
+                    Select Type
+                </option>
+
+                <option>Online Consultation</option>
+
+                <option>Clinic Visit</option>
+
+            </select>
+
+        </div>
+
+
+        <button class="submit-btn"
+                onclick="confirmBooking()">
+
+            Confirm Appointment
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* ================= FILTER DOCTORS ================= */
+
+function filterDoctors(){
+
+    const search =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const specialization =
+        document.getElementById("specializationFilter")
+        .value;
+
+    const cards =
+        document.querySelectorAll(".doctor-card");
+
+    let count = 0;
+
+
+    cards.forEach(function(card){
+
+        const name =
+            card.dataset.name.toLowerCase();
+
+        const spec =
+            card.dataset.specialization.toLowerCase();
+
+
+        const searchMatch =
+            name.includes(search) ||
+            spec.includes(search);
+
+        const specializationMatch =
+            specialization === "all" ||
+            spec === specialization;
+
+
+        if(searchMatch && specializationMatch){
+
+            card.style.display = "block";
+            count++;
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+
+    document.getElementById("emptyMessage")
+        .style.display =
+        count === 0 ? "block" : "none";
+
+}
+
+
+/* ================= BOOK DOCTOR ================= */
+
+function bookDoctor(name, specialization){
+
+    document.getElementById("selectedDoctor")
+        .value =
+        name + " - " + specialization;
+
+    document.getElementById("bookingModal")
+        .style.display = "flex";
+
+}
+
+
+/* ================= CONFIRM BOOKING ================= */
+
+function confirmBooking(){
+
+    const doctor =
+        document.getElementById("selectedDoctor").value;
+
+    const date =
+        document.getElementById("appointmentDate").value;
+
+    const time =
+        document.getElementById("appointmentTime").value;
+
+    const type =
+        document.getElementById("consultationType").value;
+
+
+    if(!date || !time || !type){
+
+        showToast(
+            "Please complete all appointment details."
+        );
+
+        return;
+
+    }
+
+
+    const booking = {
+
+        doctor:doctor,
+        date:date,
+        time:time,
+        type:type,
+        status:"Upcoming"
+
+    };
+
+
+    let bookings =
+        JSON.parse(
+            localStorage.getItem("medicareAppointments")
+        ) || [];
+
+
+    bookings.push(booking);
+
+
+    localStorage.setItem(
+        "medicareAppointments",
+        JSON.stringify(bookings)
+    );
+
+
+    closeModal();
+
+
+    showToast(
+        "Appointment booked successfully!"
+    );
+
+
+    document.getElementById("appointmentDate")
+        .value = "";
+
+    document.getElementById("appointmentTime")
+        .value = "";
+
+    document.getElementById("consultationType")
+        .value = "";
+
+}
+
+
+/* ================= DOCTOR DETAILS ================= */
+
+function viewDoctor(
+    name,
+    specialization,
+    experience,
+    fee
+){
+
+    alert(
+        "Doctor Details\n\n" +
+        "Doctor: " + name + "\n" +
+        "Specialization: " + specialization + "\n" +
+        "Experience: " + experience + "\n" +
+        "Consultation Fee: " + fee
+    );
+
+}
+
+
+/* ================= MODAL ================= */
+
+function closeModal(){
+
+    document.getElementById("bookingModal")
+        .style.display = "none";
+
+}
+
+
+/* ================= TOAST ================= */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.style.display = "block";
+
+    setTimeout(function(){
+
+        toast.style.display = "none";
+
+    },3000);
+
+}
+
+
+/* ================= NOTIFICATIONS ================= */
+
+function showNotifications(){
+
+    alert(
+        "Notifications\n\n" +
+        "• You have 3 upcoming appointments.\n" +
+        "• New lab report available.\n" +
+        "• Medicine reminder at 8:00 PM."
+    );
+
+}
+
+
+/* ================= PROFILE ================= */
+
+function goProfile(){
+
+    window.location.href =
+        "profile.html";
+
+}
+
+
+/* ================= CLOSE MODAL ================= */
+
+window.addEventListener(
+    "click",
+    function(event){
+
+        const modal =
+            document.getElementById("bookingModal");
+
+        if(event.target === modal){
+
+            closeModal();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+```

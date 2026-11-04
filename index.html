@@ -1,0 +1,448 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MediCare - Login</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #e8faff, #f2f6ff);
+        }
+
+        .login-container {
+            width: 420px;
+            max-width: 92%;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.12);
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 34px;
+            font-weight: bold;
+            color: #087f8c;
+            margin-bottom: 8px;
+        }
+
+        .logo span {
+            color: #075e72;
+        }
+
+        .welcome {
+            text-align: center;
+            color: #333;
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            outline: none;
+            font-size: 14px;
+            background: white;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #087f8c;
+            box-shadow: 0 0 0 3px rgba(8, 127, 140, 0.08);
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 5px 0 20px;
+            font-size: 13px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #666;
+        }
+
+        .remember input {
+            width: auto;
+        }
+
+        a {
+            color: #087f8c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 9px;
+            background: linear-gradient(135deg, #087f8c, #075e72);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(8, 127, 140, 0.25);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 22px 0;
+            color: #aaa;
+            font-size: 13px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            height: 1px;
+            background: #ddd;
+            flex: 1;
+        }
+
+        .google-btn {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            background: white;
+            color: #333;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .google-btn:hover {
+            background: #f8f8f8;
+        }
+
+        .register {
+            text-align: center;
+            margin-top: 22px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* FORGOT PASSWORD MODAL */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-box {
+            width: 380px;
+            max-width: 90%;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+        }
+
+        .modal-box h3 {
+            color: #075e72;
+            margin-bottom: 10px;
+        }
+
+        .modal-box p {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .close {
+            float: right;
+            font-size: 25px;
+            color: #777;
+            cursor: pointer;
+        }
+
+        .reset-btn {
+            width: 100%;
+            margin-top: 15px;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #087f8c;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        @media (max-width: 450px) {
+            .login-container {
+                padding: 30px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="logo">
+        Medi<span>Care</span>
+    </div>
+
+    <h2 class="welcome">Welcome Back</h2>
+
+    <p class="subtitle">
+        Login to your MediCare account
+    </p>
+
+    <form id="loginForm">
+
+        <!-- ROLE -->
+
+        <div class="input-group">
+            <label>Login As</label>
+
+            <select id="role" required>
+                <option value="">Select Role</option>
+                <option value="patient">Patient</option>
+                <option value="doctor">Doctor</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
+
+        <!-- EMAIL -->
+
+        <div class="input-group">
+            <label>Email Address</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+            >
+        </div>
+
+        <!-- PASSWORD -->
+
+        <div class="input-group">
+            <label>Password</label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+            >
+        </div>
+
+        <!-- OPTIONS -->
+
+        <div class="options">
+
+            <label class="remember">
+                <input type="checkbox" id="remember">
+                Remember me
+            </label>
+
+            <a href="#" onclick="forgotPassword(event)">
+                Forgot Password?
+            </a>
+
+        </div>
+
+        <button type="submit" class="login-btn">
+            Login
+        </button>
+
+    </form>
+
+    <div class="divider">
+        OR
+    </div>
+
+    
+
+    <div class="register">
+        Don't have an account?
+        <a href="register.html">
+            Create Account
+        </a>
+    </div>
+
+    <p id="message"></p>
+
+</div>
+
+
+<!-- FORGOT PASSWORD -->
+
+<div class="modal" id="forgotModal">
+
+    <div class="modal-box">
+
+        <span class="close" onclick="closeForgot()">
+            ×
+        </span>
+
+        <h3>Reset Password</h3>
+
+        <p>
+            Enter your registered email address.
+        </p>
+
+        <input
+            type="email"
+            id="resetEmail"
+            placeholder="Enter email address"
+        >
+
+        <button class="reset-btn" onclick="resetPassword()">
+            Send Reset Link
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    // LOGIN
+
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+
+        e.preventDefault();
+
+        const role = document.getElementById("role").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const remember = document.getElementById("remember").checked;
+        const message = document.getElementById("message");
+
+        if (!role || !email || !password) {
+
+            message.style.color = "red";
+            message.textContent = "Please fill all fields.";
+
+            return;
+        }
+
+        localStorage.setItem("medicareUser", email);
+        localStorage.setItem("medicareRole", role);
+
+        if (remember) {
+            localStorage.setItem("rememberMe", "true");
+        }
+
+        message.style.color = "green";
+        message.textContent = "Login successful!";
+
+        setTimeout(() => {
+            window.location.href = "dashboard.html";
+        }, 1000);
+
+    });
+
+
+    // GOOGLE LOGIN
+
+    function googleLogin() {
+
+        alert("Google Login will be connected later.");
+
+    }
+
+
+    // FORGOT PASSWORD
+
+    function forgotPassword(event) {
+
+        event.preventDefault();
+
+        document.getElementById("forgotModal").style.display = "flex";
+
+    }
+
+
+    function closeForgot() {
+
+        document.getElementById("forgotModal").style.display = "none";
+
+    }
+
+
+    function resetPassword() {
+
+        const email = document.getElementById("resetEmail").value;
+
+        if (!email) {
+
+            alert("Please enter your email.");
+
+            return;
+        }
+
+        alert("Password reset link sent to " + email);
+
+        closeForgot();
+
+    }
+
+</script>
+
+</body>
+</html>
+
