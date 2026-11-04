@@ -63,12 +63,3 @@ To develop a centralized digital healthcare platform that improves patient conve
 
 Full Stack Developer | Student | Tech Enthusiast
 
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-⭐ **If you like this project, don't forget to star the repository!**
-
-*Built with ❤️ to make healthcare smarter, simpler, and more accessible.*
