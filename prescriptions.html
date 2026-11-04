@@ -1,0 +1,1053 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prescriptions | MediCare</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f5f9f8;
+    color:#173b3a;
+}
+
+/* NAVBAR */
+.navbar{
+    height:72px;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    border-bottom:1px solid #e5eeee;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+    color:#087f7b;
+}
+
+.logo span{
+    color:#163f3d;
+}
+
+.nav-links{
+    display:flex;
+    gap:24px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#637776;
+    font-size:14px;
+    font-weight:600;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+    color:#087f7b;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.notification{
+    width:40px;
+    height:40px;
+    border:1px solid #dce9e7;
+    background:white;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.profile-btn{
+    border:none;
+    background:#087f7b;
+    color:white;
+    padding:11px 18px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* MAIN */
+.container{
+    width:88%;
+    max-width:1250px;
+    margin:35px auto;
+}
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:28px;
+}
+
+.page-header h1{
+    font-size:30px;
+    margin-bottom:7px;
+}
+
+.page-header p{
+    color:#708281;
+}
+
+/* SUMMARY */
+.summary{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.summary-card{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    border:1px solid #e4eeee;
+}
+
+.summary-card .icon{
+    font-size:25px;
+    margin-bottom:10px;
+}
+
+.summary-card h2{
+    font-size:25px;
+    margin-bottom:5px;
+}
+
+.summary-card p{
+    color:#748381;
+    font-size:13px;
+}
+
+/* FILTER */
+.filter-box{
+    background:white;
+    padding:18px;
+    border:1px solid #e4eeee;
+    border-radius:14px;
+    display:flex;
+    gap:14px;
+    margin-bottom:25px;
+}
+
+.search{
+    flex:1;
+}
+
+.search input,
+.filter-box select{
+    width:100%;
+    padding:13px;
+    border:1px solid #dbe7e5;
+    border-radius:9px;
+    outline:none;
+    background:#fbfdfd;
+}
+
+.search input:focus,
+.filter-box select:focus{
+    border-color:#087f7b;
+}
+
+/* PRESCRIPTIONS */
+.prescriptions{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.card{
+    background:white;
+    border:1px solid #e3eceb;
+    border-radius:15px;
+    padding:20px;
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+}
+
+.card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:18px;
+}
+
+.medicine-icon{
+    width:50px;
+    height:50px;
+    background:#e8f7f5;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+}
+
+.status{
+    padding:6px 11px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.active-status{
+    background:#e5f7ef;
+    color:#168454;
+}
+
+.completed-status{
+    background:#edf0f0;
+    color:#687573;
+}
+
+.card h3{
+    font-size:18px;
+    margin-bottom:7px;
+}
+
+.doctor{
+    color:#087f7b;
+    font-weight:600;
+    font-size:14px;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin:18px 0;
+}
+
+.info{
+    background:#f7faf9;
+    padding:11px;
+    border-radius:8px;
+}
+
+.info small{
+    display:block;
+    color:#84918f;
+    font-size:11px;
+    margin-bottom:4px;
+}
+
+.info strong{
+    font-size:13px;
+}
+
+.medicines{
+    border-top:1px solid #edf2f1;
+    padding-top:15px;
+}
+
+.medicine-row{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    font-size:13px;
+}
+
+.medicine-row span{
+    color:#71807e;
+}
+
+.actions{
+    display:flex;
+    gap:9px;
+    margin-top:15px;
+    border-top:1px solid #edf2f1;
+    padding-top:15px;
+}
+
+.actions button{
+    flex:1;
+    padding:10px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+    border:1px solid #dce8e6;
+    background:white;
+    color:#087f7b;
+}
+
+.actions button:hover{
+    background:#eef9f7;
+}
+
+.actions .primary{
+    background:#087f7b;
+    color:white;
+    border-color:#087f7b;
+}
+
+/* EMPTY */
+.empty{
+    display:none;
+    text-align:center;
+    background:white;
+    padding:50px;
+    border-radius:14px;
+    border:1px solid #e4eeee;
+    grid-column:1/-1;
+}
+
+/* MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(10,35,34,.55);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:500;
+}
+
+.modal-content{
+    width:100%;
+    max-width:540px;
+    background:white;
+    border-radius:16px;
+    padding:25px;
+    max-height:90vh;
+    overflow:auto;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.close{
+    width:35px;
+    height:35px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    background:#f1f5f4;
+    font-size:18px;
+}
+
+.detail-row{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:13px 0;
+    border-bottom:1px solid #edf1f0;
+}
+
+.detail-row span:first-child{
+    color:#778582;
+}
+
+.detail-row span:last-child{
+    font-weight:600;
+    text-align:right;
+}
+
+.modal-medicine{
+    margin-top:18px;
+    background:#f7faf9;
+    border-radius:10px;
+    padding:15px;
+}
+
+.modal-medicine h4{
+    margin-bottom:10px;
+}
+
+.modal-medicine p{
+    margin:7px 0;
+    font-size:14px;
+}
+
+/* TOAST */
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#173b3a;
+    color:white;
+    padding:14px 20px;
+    border-radius:9px;
+    display:none;
+    z-index:1000;
+}
+
+/* RESPONSIVE */
+@media(max-width:1000px){
+    .nav-links{
+        gap:12px;
+    }
+
+    .summary{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:750px){
+    .navbar{
+        padding:0 4%;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .page-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .filter-box{
+        flex-direction:column;
+    }
+
+    .prescriptions{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:500px){
+    .container{
+        width:92%;
+    }
+
+    .summary{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">Medi<span>Care</span></div>
+
+    <div class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="appointments.html">Appointments</a>
+        <a href="doctors.html">Doctors</a>
+        <a href="records.html">Records</a>
+        <a class="active" href="prescriptions.html">Prescriptions</a>
+        <a href="lab-reports.html">Lab Reports</a>
+    </div>
+
+    <div class="nav-right">
+        <button class="notification" onclick="showNotifications()">🔔</button>
+        <button class="profile-btn" onclick="goProfile()">Profile</button>
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+    <div class="page-header">
+        <div>
+            <h1>Prescriptions</h1>
+            <p>View your medicines, dosage instructions and prescription history.</p>
+        </div>
+    </div>
+
+
+    <!-- SUMMARY -->
+    <div class="summary">
+
+        <div class="summary-card">
+            <div class="icon">💊</div>
+            <h2>5</h2>
+            <p>Active Medicines</p>
+        </div>
+
+        <div class="summary-card">
+            <div class="icon">📋</div>
+            <h2>8</h2>
+            <p>Total Prescriptions</p>
+        </div>
+
+        <div class="summary-card">
+            <div class="icon">👨‍⚕️</div>
+            <h2>4</h2>
+            <p>Doctors</p>
+        </div>
+
+        <div class="summary-card">
+            <div class="icon">⏰</div>
+            <h2>3</h2>
+            <p>Today's Doses</p>
+        </div>
+
+    </div>
+
+
+    <!-- FILTER -->
+    <div class="filter-box">
+
+        <div class="search">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search medicine, doctor or prescription..."
+                oninput="filterPrescriptions()"
+            >
+        </div>
+
+        <select id="statusFilter" onchange="filterPrescriptions()">
+            <option value="all">All Prescriptions</option>
+            <option value="active">Active</option>
+            <option value="completed">Completed</option>
+        </select>
+
+    </div>
+
+
+    <!-- PRESCRIPTIONS -->
+    <div class="prescriptions" id="prescriptions">
+
+        <!-- CARD 1 -->
+        <div class="card"
+             data-status="active"
+             data-search="paracetamol fever arun kumar fever medication">
+
+            <div class="card-top">
+                <div class="medicine-icon">💊</div>
+                <span class="status active-status">Active</span>
+            </div>
+
+            <h3>Fever Medication</h3>
+            <p class="doctor">Dr. Arun Kumar</p>
+
+            <div class="info-grid">
+
+                <div class="info">
+                    <small>Prescription Date</small>
+                    <strong>10 Sep 2026</strong>
+                </div>
+
+                <div class="info">
+                    <small>Valid Until</small>
+                    <strong>15 Sep 2026</strong>
+                </div>
+
+                <div class="info">
+                    <small>Medicines</small>
+                    <strong>2 Medicines</strong>
+                </div>
+
+                <div class="info">
+                    <small>Duration</small>
+                    <strong>5 Days</strong>
+                </div>
+
+            </div>
+
+            <div class="medicines">
+
+                <div class="medicine-row">
+                    <strong>Paracetamol 500mg</strong>
+                    <span>1-0-1</span>
+                </div>
+
+                <div class="medicine-row">
+                    <strong>Cetirizine 10mg</strong>
+                    <span>0-0-1</span>
+                </div>
+
+            </div>
+
+            <div class="actions">
+                <button onclick="viewPrescription(
+                    'Fever Medication',
+                    'Dr. Arun Kumar',
+                    '10 Sep 2026',
+                    'Paracetamol 500mg - 1-0-1',
+                    'Cetirizine 10mg - 0-0-1'
+                )">
+                    View
+                </button>
+
+                <button class="primary"
+                        onclick="downloadPrescription('Fever Medication','Dr. Arun Kumar')">
+                    Download
+                </button>
+            </div>
+
+        </div>
+
+
+        <!-- CARD 2 -->
+        <div class="card"
+             data-status="active"
+             data-search="vitamin deficiency priya sharma vitamin d">
+
+            <div class="card-top">
+                <div class="medicine-icon">💊</div>
+                <span class="status active-status">Active</span>
+            </div>
+
+            <h3>Vitamin Supplement</h3>
+            <p class="doctor">Dr. Priya Sharma</p>
+
+            <div class="info-grid">
+
+                <div class="info">
+                    <small>Prescription Date</small>
+                    <strong>08 Sep 2026</strong>
+                </div>
+
+                <div class="info">
+                    <small>Valid Until</small>
+                    <strong>08 Oct 2026</strong>
+                </div>
+
+                <div class="info">
+                    <small>Medicines</small>
+                    <strong>1 Medicine</strong>
+                </div>
+
+                <div class="info">
+                    <small>Duration</small>
+                    <strong>30 Days</strong>
+                </div>
+
+            </div>
+
+            <div class="medicines">
+
+                <div class="medicine-row">
+                    <strong>Vitamin D3 60K</strong>
+                    <span>Weekly</span>
+                </div>
+
+            </div>
+
+            <div class="actions">
+
+                <button onclick="viewPrescription(
+                    'Vitamin Supplement',
+                    'Dr. Priya Sharma',
+                    '08 Sep 2026',
+                    'Vitamin D3 60K - Weekly',
+                    'Take once every week'
+                )">
+                    View
+                </button>
+
+                <button class="primary"
+                        onclick="downloadPrescription('Vitamin Supplement','Dr. Priya Sharma')">
+                    Download
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- CARD 3 -->
+        <div class="card"
+             data-status="completed"
+             data-search="skin allergy meena raj cetirizine cream">
+
+            <div class="card-top">
+                <div class="medicine-icon">🧴</div>
+                <span class="status completed-status">Completed</span>
+            </div>
+
+            <h3>Skin Allergy Treatment</h3>
+            <p class="doctor">Dr. Meena Raj</p>
+
+            <div class="info-grid">
+
+                <div class="info">
+                    <small>Prescription Date</small>
+                    <strong>01 Sep 2026</strong>
+                </div>
+
+                <div class="info">
+                    <small>Completed</small>
+                    <strong>07 Sep 2026</strong>
+                </div>
+
+                <div class="info">
+                    <small>Medicines</small>
+                    <strong>2 Medicines</strong>
+                </div>
+
+                <div class="info">
+                    <small>Duration</small>
+                    <strong>7 Days</strong>
+                </div>
+
+            </div>
+
+            <div class="medicines">
+
+                <div class="medicine-row">
+                    <strong>Levocetirizine</strong>
+                    <span>0-0-1</span>
+                </div>
+
+                <div class="medicine-row">
+                    <strong>Skin Cream</strong>
+                    <span>Twice Daily</span>
+                </div>
+
+            </div>
+
+            <div class="actions">
+
+                <button onclick="viewPrescription(
+                    'Skin Allergy Treatment',
+                    'Dr. Meena Raj',
+                    '01 Sep 2026',
+                    'Levocetirizine - 0-0-1',
+                    'Skin Cream - Twice Daily'
+                )">
+                    View
+                </button>
+
+                <button class="primary"
+                        onclick="downloadPrescription('Skin Allergy Treatment','Dr. Meena Raj')">
+                    Download
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- CARD 4 -->
+        <div class="card"
+             data-status="completed"
+             data-search="headache neurologist rahul menon migraine">
+
+            <div class="card-top">
+                <div class="medicine-icon">💊</div>
+                <span class="status completed-status">Completed</span>
+            </div>
+
+            <h3>Headache Treatment</h3>
+            <p class="doctor">Dr. Rahul Menon</p>
+
+            <div class="info-grid">
+
+                <div class="info">
+                    <small>Prescription Date</small>
+                    <strong>25 Aug 2026</strong>
+                </div>
+
+                <div class="info">
+                    <small>Completed</small>
+                    <strong>30 Aug 2026</strong>
+                </div>
+
+                <div class="info">
+                    <small>Medicines</small>
+                    <strong>1 Medicine</strong>
+                </div>
+
+                <div class="info">
+                    <small>Duration</small>
+                    <strong>5 Days</strong>
+                </div>
+
+            </div>
+
+            <div class="medicines">
+
+                <div class="medicine-row">
+                    <strong>Ibuprofen 400mg</strong>
+                    <span>1-0-1</span>
+                </div>
+
+            </div>
+
+            <div class="actions">
+
+                <button onclick="viewPrescription(
+                    'Headache Treatment',
+                    'Dr. Rahul Menon',
+                    '25 Aug 2026',
+                    'Ibuprofen 400mg - 1-0-1',
+                    'Take after food'
+                )">
+                    View
+                </button>
+
+                <button class="primary"
+                        onclick="downloadPrescription('Headache Treatment','Dr. Rahul Menon')">
+                    Download
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="empty" id="emptyState">
+            <h3>No prescriptions found</h3>
+            <p>Try changing your search or filter.</p>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- DETAILS MODAL -->
+<div class="modal" id="viewModal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h2>Prescription Details</h2>
+            <button class="close" onclick="closeModal()">×</button>
+        </div>
+
+        <div class="detail-row">
+            <span>Prescription</span>
+            <span id="pName"></span>
+        </div>
+
+        <div class="detail-row">
+            <span>Doctor</span>
+            <span id="pDoctor"></span>
+        </div>
+
+        <div class="detail-row">
+            <span>Date</span>
+            <span id="pDate"></span>
+        </div>
+
+        <div class="modal-medicine">
+            <h4>Medicine Instructions</h4>
+            <p id="medicine1"></p>
+            <p id="medicine2"></p>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* FILTER */
+function filterPrescriptions(){
+
+    const search =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const status =
+        document.getElementById("statusFilter").value;
+
+    const cards =
+        document.querySelectorAll(".card");
+
+    let visible = 0;
+
+    cards.forEach(card => {
+
+        const cardStatus = card.dataset.status;
+        const text = card.dataset.search;
+
+        const searchMatch =
+            text.includes(search);
+
+        const statusMatch =
+            status === "all" ||
+            cardStatus === status;
+
+        if(searchMatch && statusMatch){
+            card.style.display = "block";
+            visible++;
+        }else{
+            card.style.display = "none";
+        }
+
+    });
+
+    document.getElementById("emptyState").style.display =
+        visible === 0 ? "block" : "none";
+}
+
+
+/* VIEW PRESCRIPTION */
+function viewPrescription(
+    name,
+    doctor,
+    date,
+    medicine1,
+    medicine2
+){
+
+    document.getElementById("pName").textContent = name;
+    document.getElementById("pDoctor").textContent = doctor;
+    document.getElementById("pDate").textContent = date;
+
+    document.getElementById("medicine1").textContent =
+        medicine1;
+
+    document.getElementById("medicine2").textContent =
+        medicine2;
+
+    document.getElementById("viewModal").style.display =
+        "flex";
+}
+
+
+function closeModal(){
+
+    document.getElementById("viewModal").style.display =
+        "none";
+}
+
+
+/* DOWNLOAD */
+function downloadPrescription(name,doctor){
+
+    const content =
+`MediCare - Prescription
+
+Prescription: ${name}
+Doctor: ${doctor}
+
+Patient: MediCare User
+
+This is a digital prescription record generated
+from the MediCare healthcare management system.
+`;
+
+    const blob = new Blob(
+        [content],
+        {type:"text/plain"}
+    );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const a =
+        document.createElement("a");
+
+    a.href = url;
+
+    a.download =
+        name.replaceAll(" ","_") +
+        "_Prescription.txt";
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    a.remove();
+
+    URL.revokeObjectURL(url);
+
+    showToast("Prescription downloaded");
+}
+
+
+/* NOTIFICATIONS */
+function showNotifications(){
+
+    alert(
+        "Notifications\n\n" +
+        "• Take Paracetamol at 8:00 PM\n" +
+        "• New prescription available\n" +
+        "• Doctor appointment tomorrow"
+    );
+}
+
+
+/* PROFILE */
+function goProfile(){
+
+    window.location.href =
+        "profile.html";
+}
+
+
+/* TOAST */
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.style.display = "block";
+
+    setTimeout(() => {
+        toast.style.display = "none";
+    },2500);
+}
+
+
+/* CLOSE MODAL */
+window.onclick = function(event){
+
+    const modal =
+        document.getElementById("viewModal");
+
+    if(event.target === modal){
+        closeModal();
+    }
+};
+
+
+/* ESCAPE */
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+            closeModal();
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+```
