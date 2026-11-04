@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare - Register</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #e8faff, #f2f6ff);
+            padding: 25px;
+        }
+
+        .register-container {
+            width: 460px;
+            max-width: 100%;
+            background: white;
+            padding: 38px;
+            border-radius: 20px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.12);
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 34px;
+            font-weight: bold;
+            color: #087f8c;
+            margin-bottom: 8px;
+        }
+
+        .logo span {
+            color: #075e72;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            color: #333;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #087f8c;
+            box-shadow: 0 0 0 3px rgba(8, 127, 140, 0.08);
+        }
+
+        .terms {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 15px 0;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .terms input {
+            width: auto;
+        }
+
+        .terms a {
+            color: #087f8c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 9px;
+            background: linear-gradient(135deg, #087f8c, #075e72);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(8, 127, 140, 0.25);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #087f8c;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 500px) {
+            .register-container {
+                padding: 28px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="register-container">
+
+    <div class="logo">
+        Medi<span>Care</span>
+    </div>
+
+    <h2>Create Account</h2>
+
+    <p class="subtitle">
+        Create your MediCare healthcare account
+    </p>
+
+    <form id="registerForm">
+
+        <!-- FULL NAME -->
+        <div class="input-group">
+            <label>Full Name</label>
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter your full name"
+                required
+            >
+        </div>
+
+        <!-- ROLE -->
+        <div class="input-group">
+            <label>Register As</label>
+
+            <select id="role" required>
+                <option value="">Select Role</option>
+                <option value="patient">Patient</option>
+                <option value="doctor">Doctor</option>
+            </select>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="input-group">
+            <label>Email Address</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+            >
+        </div>
+
+        <!-- PHONE -->
+        <div class="input-group">
+            <label>Phone Number</label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="Enter your phone number"
+                pattern="[0-9]{10}"
+                required
+            >
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="input-group">
+            <label>Password</label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Create a password"
+                minlength="6"
+                required
+            >
+        </div>
+
+        <!-- CONFIRM PASSWORD -->
+        <div class="input-group">
+            <label>Confirm Password</label>
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm your password"
+                required
+            >
+        </div>
+
+        <!-- TERMS -->
+        <label class="terms">
+            <input type="checkbox" id="terms" required>
+
+            <span>
+                I agree to the
+                <a href="#">Terms & Conditions</a>
+            </span>
+        </label>
+
+        <button type="submit" class="register-btn">
+            Create Account
+        </button>
+
+    </form>
+
+    <p id="message"></p>
+
+    <div class="login-link">
+        Already have an account?
+        <a href="index.html">Login</a>
+    </div>
+
+</div>
+
+
+<script>
+
+    document.getElementById("registerForm").addEventListener("submit", function(e) {
+
+        e.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const role = document.getElementById("role").value;
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const password = document.getElementById("password").value;
+        const confirmPassword =
+            document.getElementById("confirmPassword").value;
+
+        const message = document.getElementById("message");
+
+        // PASSWORD CHECK
+
+        if (password !== confirmPassword) {
+
+            message.style.color = "red";
+            message.textContent = "Passwords do not match.";
+
+            return;
+        }
+
+        // SAVE USER
+
+        const user = {
+            name: name,
+            role: role,
+            email: email,
+            phone: phone,
+            password: password
+        };
+
+        localStorage.setItem(
+            "medicareRegisteredUser",
+            JSON.stringify(user)
+        );
+
+        message.style.color = "green";
+        message.textContent = "Account created successfully!";
+
+        // REDIRECT TO LOGIN
+
+        setTimeout(() => {
+
+            window.location.href = "index.html";
+
+        }, 1200);
+
+    });
+
+</script>
+
+</body>
+</html>
+
