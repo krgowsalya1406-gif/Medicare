@@ -1,0 +1,1433 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediCare - Appointments</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f8f8;
+    color:#243333;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    height:70px;
+    background:#ffffff;
+    border-bottom:1px solid #e1eaea;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 5%;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#087f7b;
+    font-size:23px;
+    font-weight:bold;
+}
+
+.logo-icon{
+    width:38px;
+    height:38px;
+    background:#087f7b;
+    color:white;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+.nav-links a{
+    color:#657373;
+    text-decoration:none;
+    font-size:14px;
+    padding:8px 0;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+    color:#087f7b;
+    font-weight:bold;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.notification{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:#edf8f7;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+
+.profile-btn{
+    border:none;
+    background:#087f7b;
+    color:white;
+    padding:10px 16px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.profile-btn:hover{
+    background:#056663;
+}
+
+/* ================= MAIN ================= */
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:35px auto;
+}
+
+.page-heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.page-heading h1{
+    font-size:30px;
+    color:#193333;
+    margin-bottom:7px;
+}
+
+.page-heading p{
+    color:#7a8888;
+    font-size:14px;
+}
+
+.primary-btn{
+    background:#087f7b;
+    border:none;
+    color:white;
+    padding:12px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.primary-btn:hover{
+    background:#056663;
+}
+
+/* ================= FILTER BAR ================= */
+
+.filter-box{
+    background:white;
+    border:1px solid #e1eaea;
+    padding:18px;
+    border-radius:12px;
+    display:flex;
+    gap:12px;
+    margin-bottom:25px;
+}
+
+.search-box{
+    flex:1;
+    position:relative;
+}
+
+.search-box input{
+    width:100%;
+    height:42px;
+    border:1px solid #dce6e6;
+    border-radius:8px;
+    padding:0 15px;
+    outline:none;
+}
+
+.filter-box select{
+    height:42px;
+    min-width:170px;
+    border:1px solid #dce6e6;
+    border-radius:8px;
+    padding:0 12px;
+    background:white;
+    color:#526060;
+    outline:none;
+}
+
+/* ================= APPOINTMENT GRID ================= */
+
+.appointment-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.appointment-card{
+    background:white;
+    border:1px solid #e1eaea;
+    border-radius:14px;
+    padding:22px;
+    transition:0.25s;
+}
+
+.appointment-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(0,80,80,0.08);
+}
+
+.card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:20px;
+}
+
+.doctor-info{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.doctor-img{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:#e4f6f4;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+}
+
+.doctor-info h3{
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+.doctor-info p{
+    font-size:12px;
+    color:#7c8989;
+}
+
+.status{
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:11px;
+    background:#e5f7eb;
+    color:#23844a;
+}
+
+.status.completed{
+    background:#e9f1f8;
+    color:#32709c;
+}
+
+.status.cancelled{
+    background:#fdeaea;
+    color:#c34848;
+}
+
+.details{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.detail{
+    background:#f7fafa;
+    padding:12px;
+    border-radius:8px;
+}
+
+.detail span{
+    display:block;
+    color:#879494;
+    font-size:11px;
+    margin-bottom:5px;
+}
+
+.detail strong{
+    font-size:13px;
+    color:#344646;
+}
+
+.card-actions{
+    display:flex;
+    gap:8px;
+}
+
+.card-actions button{
+    flex:1;
+    padding:10px 5px;
+    border-radius:7px;
+    font-size:12px;
+    cursor:pointer;
+}
+
+.join-btn{
+    border:none;
+    background:#087f7b;
+    color:white;
+}
+
+.reschedule-btn{
+    border:1px solid #087f7b;
+    color:#087f7b;
+    background:white;
+}
+
+.cancel-btn{
+    border:1px solid #e4aaaa;
+    color:#c34848;
+    background:white;
+}
+
+.details-btn{
+    border:none;
+    background:#edf7f6;
+    color:#087f7b;
+}
+
+/* ================= EMPTY MESSAGE ================= */
+
+.empty{
+    display:none;
+    background:white;
+    border:1px solid #e1eaea;
+    border-radius:12px;
+    padding:50px;
+    text-align:center;
+    color:#7b8989;
+}
+
+.empty-icon{
+    font-size:40px;
+    margin-bottom:12px;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.45);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:2000;
+}
+
+.modal-box{
+    width:100%;
+    max-width:500px;
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    max-height:90vh;
+    overflow-y:auto;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.modal-header h2{
+    font-size:21px;
+}
+
+.close{
+    border:none;
+    background:none;
+    font-size:26px;
+    cursor:pointer;
+    color:#777;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    font-size:13px;
+    margin-bottom:7px;
+    color:#445454;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    height:43px;
+    border:1px solid #dce6e6;
+    border-radius:8px;
+    padding:0 12px;
+    outline:none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.search-box input:focus{
+    border-color:#087f7b;
+}
+
+.submit-btn{
+    width:100%;
+    height:44px;
+    border:none;
+    background:#087f7b;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.submit-btn:hover{
+    background:#056663;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#173b3a;
+    color:white;
+    padding:14px 18px;
+    border-radius:9px;
+    font-size:13px;
+    display:none;
+    z-index:3000;
+    box-shadow:0 8px 25px rgba(0,0,0,0.2);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1000px){
+
+    .nav-links{
+        gap:13px;
+    }
+
+    .appointment-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:750px){
+
+    .navbar{
+        padding:0 4%;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .container{
+        width:92%;
+    }
+
+    .page-heading{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .filter-box{
+        flex-direction:column;
+    }
+
+    .filter-box select{
+        width:100%;
+    }
+}
+
+@media(max-width:500px){
+
+    .logo{
+        font-size:20px;
+    }
+
+    .profile-btn{
+        padding:9px 11px;
+    }
+
+    .details{
+        grid-template-columns:1fr;
+    }
+
+    .card-actions{
+        flex-wrap:wrap;
+    }
+
+    .card-actions button{
+        min-width:30%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        <div class="logo-icon">✚</div>
+        MediCare
+    </div>
+
+    <div class="nav-links">
+
+        <a href="dashboard.html">Dashboard</a>
+
+        <a href="appointments.html" class="active">
+            Appointments
+        </a>
+
+        <a href="doctors.html">
+            Doctors
+        </a>
+
+        <a href="records.html">
+            Records
+        </a>
+
+        <a href="prescriptions.html">
+            Prescriptions
+        </a>
+
+        <a href="lab-reports.html">
+            Lab Reports
+        </a>
+
+    </div>
+
+    <div class="nav-right">
+
+        <div class="notification"
+             onclick="showNotifications()">
+            🔔
+        </div>
+
+        <button class="profile-btn"
+                onclick="goProfile()">
+            👤 Profile
+        </button>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+    <div class="page-heading">
+
+        <div>
+            <h1>Appointments</h1>
+            <p>Book, view and manage your medical appointments.</p>
+        </div>
+
+        <button class="primary-btn"
+                onclick="openBooking()">
+            + Book Appointment
+        </button>
+
+    </div>
+
+
+    <!-- ================= FILTER ================= -->
+
+    <div class="filter-box">
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search doctor or specialization..."
+                oninput="filterAppointments()">
+
+        </div>
+
+        <select id="statusFilter"
+                onchange="filterAppointments()">
+
+            <option value="all">
+                All Status
+            </option>
+
+            <option value="upcoming">
+                Upcoming
+            </option>
+
+            <option value="completed">
+                Completed
+            </option>
+
+            <option value="cancelled">
+                Cancelled
+            </option>
+
+        </select>
+
+        <select id="typeFilter"
+                onchange="filterAppointments()">
+
+            <option value="all">
+                All Types
+            </option>
+
+            <option value="online">
+                Online
+            </option>
+
+            <option value="clinic">
+                Clinic Visit
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- ================= APPOINTMENTS ================= -->
+
+    <div class="appointment-grid"
+         id="appointmentGrid">
+
+
+        <!-- CARD 1 -->
+
+        <div class="appointment-card"
+             data-doctor="Dr. Priya Sharma"
+             data-specialization="Cardiologist"
+             data-status="upcoming"
+             data-type="online">
+
+            <div class="card-top">
+
+                <div class="doctor-info">
+
+                    <div class="doctor-img">
+                        👩‍⚕️
+                    </div>
+
+                    <div>
+                        <h3>Dr. Priya Sharma</h3>
+                        <p>Cardiologist</p>
+                    </div>
+
+                </div>
+
+                <span class="status">
+                    Upcoming
+                </span>
+
+            </div>
+
+
+            <div class="details">
+
+                <div class="detail">
+                    <span>Date</span>
+                    <strong>18 Sep 2026</strong>
+                </div>
+
+                <div class="detail">
+                    <span>Time</span>
+                    <strong>10:30 AM</strong>
+                </div>
+
+                <div class="detail">
+                    <span>Type</span>
+                    <strong>Online</strong>
+                </div>
+
+                <div class="detail">
+                    <span>ID</span>
+                    <strong>MC-10245</strong>
+                </div>
+
+            </div>
+
+
+            <div class="card-actions">
+
+                <button class="join-btn"
+                        onclick="joinConsultation()">
+                    Join
+                </button>
+
+                <button class="reschedule-btn"
+                        onclick="rescheduleAppointment()">
+                    Reschedule
+                </button>
+
+                <button class="cancel-btn"
+                        onclick="cancelAppointment(this)">
+                    Cancel
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- CARD 2 -->
+
+        <div class="appointment-card"
+             data-doctor="Dr. Arun Kumar"
+             data-specialization="General Physician"
+             data-status="upcoming"
+             data-type="clinic">
+
+            <div class="card-top">
+
+                <div class="doctor-info">
+
+                    <div class="doctor-img">
+                        👨‍⚕️
+                    </div>
+
+                    <div>
+                        <h3>Dr. Arun Kumar</h3>
+                        <p>General Physician</p>
+                    </div>
+
+                </div>
+
+                <span class="status">
+                    Upcoming
+                </span>
+
+            </div>
+
+
+            <div class="details">
+
+                <div class="detail">
+                    <span>Date</span>
+                    <strong>19 Sep 2026</strong>
+                </div>
+
+                <div class="detail">
+                    <span>Time</span>
+                    <strong>2:00 PM</strong>
+                </div>
+
+                <div class="detail">
+                    <span>Type</span>
+                    <strong>Clinic Visit</strong>
+                </div>
+
+                <div class="detail">
+                    <span>ID</span>
+                    <strong>MC-10246</strong>
+                </div>
+
+            </div>
+
+
+            <div class="card-actions">
+
+                <button class="reschedule-btn"
+                        onclick="rescheduleAppointment()">
+                    Reschedule
+                </button>
+
+                <button class="cancel-btn"
+                        onclick="cancelAppointment(this)">
+                    Cancel
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- CARD 3 -->
+
+        <div class="appointment-card"
+             data-doctor="Dr. Meena Raj"
+             data-specialization="Dermatologist"
+             data-status="completed"
+             data-type="clinic">
+
+            <div class="card-top">
+
+                <div class="doctor-info">
+
+                    <div class="doctor-img">
+                        👩‍⚕️
+                    </div>
+
+                    <div>
+                        <h3>Dr. Meena Raj</h3>
+                        <p>Dermatologist</p>
+                    </div>
+
+                </div>
+
+                <span class="status completed">
+                    Completed
+                </span>
+
+            </div>
+
+
+            <div class="details">
+
+                <div class="detail">
+                    <span>Date</span>
+                    <strong>10 Sep 2026</strong>
+                </div>
+
+                <div class="detail">
+                    <span>Time</span>
+                    <strong>11:00 AM</strong>
+                </div>
+
+                <div class="detail">
+                    <span>Type</span>
+                    <strong>Clinic Visit</strong>
+                </div>
+
+                <div class="detail">
+                    <span>ID</span>
+                    <strong>MC-10241</strong>
+                </div>
+
+            </div>
+
+
+            <div class="card-actions">
+
+                <button class="details-btn"
+                        onclick="viewAppointment()">
+                    View Details
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- CARD 4 -->
+
+        <div class="appointment-card"
+             data-doctor="Dr. Rahul Menon"
+             data-specialization="Neurologist"
+             data-status="upcoming"
+             data-type="online">
+
+            <div class="card-top">
+
+                <div class="doctor-info">
+
+                    <div class="doctor-img">
+                        👨‍⚕️
+                    </div>
+
+                    <div>
+                        <h3>Dr. Rahul Menon</h3>
+                        <p>Neurologist</p>
+                    </div>
+
+                </div>
+
+                <span class="status">
+                    Upcoming
+                </span>
+
+            </div>
+
+
+            <div class="details">
+
+                <div class="detail">
+                    <span>Date</span>
+                    <strong>25 Sep 2026</strong>
+                </div>
+
+                <div class="detail">
+                    <span>Time</span>
+                    <strong>11:00 AM</strong>
+                </div>
+
+                <div class="detail">
+                    <span>Type</span>
+                    <strong>Online</strong>
+                </div>
+
+                <div class="detail">
+                    <span>ID</span>
+                    <strong>MC-10250</strong>
+                </div>
+
+            </div>
+
+
+            <div class="card-actions">
+
+                <button class="join-btn"
+                        onclick="joinConsultation()">
+                    Join
+                </button>
+
+                <button class="reschedule-btn"
+                        onclick="rescheduleAppointment()">
+                    Reschedule
+                </button>
+
+                <button class="cancel-btn"
+                        onclick="cancelAppointment(this)">
+                    Cancel
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="empty" id="emptyMessage">
+
+        <div class="empty-icon">
+            📅
+        </div>
+
+        <h3>No appointments found</h3>
+
+        <p>
+            Try changing your search or filter.
+        </p>
+
+    </div>
+
+</main>
+
+
+<!-- ================= BOOKING MODAL ================= -->
+
+<div class="modal" id="bookingModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>Book Appointment</h2>
+
+            <button class="close"
+                    onclick="closeBooking()">
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Doctor</label>
+
+            <select id="doctorSelect">
+
+                <option value="">
+                    Select Doctor
+                </option>
+
+                <option>
+                    Dr. Priya Sharma - Cardiologist
+                </option>
+
+                <option>
+                    Dr. Arun Kumar - General Physician
+                </option>
+
+                <option>
+                    Dr. Meena Raj - Dermatologist
+                </option>
+
+                <option>
+                    Dr. Rahul Menon - Neurologist
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Date</label>
+
+            <input
+                type="date"
+                id="bookingDate">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Time</label>
+
+            <input
+                type="time"
+                id="bookingTime">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Consultation Type</label>
+
+            <select id="bookingType">
+
+                <option value="">
+                    Select Type
+                </option>
+
+                <option value="Online">
+                    Online Consultation
+                </option>
+
+                <option value="Clinic Visit">
+                    Clinic Visit
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Reason for Visit</label>
+
+            <input
+                type="text"
+                id="reason"
+                placeholder="Enter reason for appointment">
+
+        </div>
+
+
+        <button class="submit-btn"
+                onclick="bookAppointment()">
+
+            Confirm Appointment
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= TOAST ================= -->
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* ================= TOAST ================= */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.style.display = "block";
+
+    setTimeout(function(){
+
+        toast.style.display = "none";
+
+    },3000);
+}
+
+
+/* ================= BOOKING MODAL ================= */
+
+function openBooking(){
+
+    document.getElementById("bookingModal")
+        .style.display = "flex";
+
+}
+
+function closeBooking(){
+
+    document.getElementById("bookingModal")
+        .style.display = "none";
+
+}
+
+
+/* ================= BOOK APPOINTMENT ================= */
+
+function bookAppointment(){
+
+    const doctor =
+        document.getElementById("doctorSelect").value;
+
+    const date =
+        document.getElementById("bookingDate").value;
+
+    const time =
+        document.getElementById("bookingTime").value;
+
+    const type =
+        document.getElementById("bookingType").value;
+
+    const reason =
+        document.getElementById("reason").value;
+
+
+    if(
+        doctor === "" ||
+        date === "" ||
+        time === "" ||
+        type === "" ||
+        reason === ""
+    ){
+
+        showToast("Please fill all appointment details.");
+
+        return;
+    }
+
+
+    const appointment = {
+
+        doctor: doctor,
+        date: date,
+        time: time,
+        type: type,
+        reason: reason,
+        status: "Upcoming"
+
+    };
+
+
+    let appointments =
+        JSON.parse(
+            localStorage.getItem("medicareAppointments")
+        ) || [];
+
+
+    appointments.push(appointment);
+
+
+    localStorage.setItem(
+        "medicareAppointments",
+        JSON.stringify(appointments)
+    );
+
+
+    closeBooking();
+
+
+    showToast(
+        "Appointment booked successfully!"
+    );
+
+
+    document.getElementById("doctorSelect").value = "";
+    document.getElementById("bookingDate").value = "";
+    document.getElementById("bookingTime").value = "";
+    document.getElementById("bookingType").value = "";
+    document.getElementById("reason").value = "";
+
+}
+
+
+/* ================= SEARCH + FILTER ================= */
+
+function filterAppointments(){
+
+    const search =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const status =
+        document.getElementById("statusFilter")
+        .value;
+
+    const type =
+        document.getElementById("typeFilter")
+        .value;
+
+
+    const cards =
+        document.querySelectorAll(".appointment-card");
+
+
+    let visible = 0;
+
+
+    cards.forEach(function(card){
+
+        const doctor =
+            card.dataset.doctor.toLowerCase();
+
+        const specialization =
+            card.dataset.specialization.toLowerCase();
+
+        const cardStatus =
+            card.dataset.status;
+
+        const cardType =
+            card.dataset.type;
+
+
+        const searchMatch =
+            doctor.includes(search) ||
+            specialization.includes(search);
+
+
+        const statusMatch =
+            status === "all" ||
+            cardStatus === status;
+
+
+        const typeMatch =
+            type === "all" ||
+            cardType === type;
+
+
+        if(
+            searchMatch &&
+            statusMatch &&
+            typeMatch
+        ){
+
+            card.style.display = "block";
+            visible++;
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+
+    const empty =
+        document.getElementById("emptyMessage");
+
+
+    if(visible === 0){
+
+        empty.style.display = "block";
+
+    }else{
+
+        empty.style.display = "none";
+
+    }
+
+}
+
+
+/* ================= CANCEL ================= */
+
+function cancelAppointment(button){
+
+    const confirmCancel =
+        confirm(
+            "Are you sure you want to cancel this appointment?"
+        );
+
+
+    if(!confirmCancel){
+
+        return;
+
+    }
+
+
+    const card =
+        button.closest(".appointment-card");
+
+
+    card.dataset.status = "cancelled";
+
+
+    const status =
+        card.querySelector(".status");
+
+
+    status.textContent = "Cancelled";
+
+    status.className =
+        "status cancelled";
+
+
+    button.remove();
+
+
+    showToast(
+        "Appointment cancelled successfully."
+    );
+
+}
+
+
+/* ================= JOIN ================= */
+
+function joinConsultation(){
+
+    showToast(
+        "Opening online consultation..."
+    );
+
+    setTimeout(function(){
+
+        alert(
+            "Online Consultation\n\n" +
+            "Your consultation room will open here."
+        );
+
+    },500);
+
+}
+
+
+/* ================= RESCHEDULE ================= */
+
+function rescheduleAppointment(){
+
+    openBooking();
+
+    showToast(
+        "Select a new date and time."
+    );
+
+}
+
+
+/* ================= VIEW DETAILS ================= */
+
+function viewAppointment(){
+
+    alert(
+        "Appointment Details\n\n" +
+        "Doctor: Dr. Meena Raj\n" +
+        "Specialization: Dermatologist\n" +
+        "Date: 10 Sep 2026\n" +
+        "Time: 11:00 AM\n" +
+        "Status: Completed"
+    );
+
+}
+
+
+/* ================= NOTIFICATIONS ================= */
+
+function showNotifications(){
+
+    alert(
+        "Notifications\n\n" +
+        "• Appointment reminder\n" +
+        "• New lab report available\n" +
+        "• Medicine reminder at 8:00 PM"
+    );
+
+}
+
+
+/* ================= PROFILE ================= */
+
+function goProfile(){
+
+    window.location.href =
+        "profile.html";
+
+}
+
+
+/* ================= CLOSE MODAL ================= */
+
+window.addEventListener(
+    "click",
+    function(event){
+
+        const modal =
+            document.getElementById("bookingModal");
+
+        if(event.target === modal){
+
+            closeBooking();
+
+        }
+
+    }
+);
+
+
+/* ================= ESC KEY ================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            closeBooking();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+```
