@@ -41,18 +41,6 @@ It helps patients manage appointments, access medical records, track medicines, 
 | MongoDB | Database |
 | Font Awesome | Icons |
 
-## 📸 Screenshots
-
-Add your project screenshots here.
-
-- Home Page
-- Login & Registration
-- Patient Dashboard
-- Doctor Dashboard
-- Appointment Management
-- Medicine Tracker
-- Medical Records
-- AI Healthcare Assistant
 
 ## 🔮 Future Enhancements
 
