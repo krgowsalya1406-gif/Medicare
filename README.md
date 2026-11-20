@@ -174,17 +174,7 @@ Our future roadmap includes:
 - 📊 Advanced health analytics.
 - 🔔 Real-time notification system.
 
-## 📸 11 | Application Preview
 
-Add your actual project screenshots here.
-
-| Patient Dashboard | Doctor Dashboard |
-|---|---|
-| Add Screenshot | Add Screenshot |
-
-| Appointment Page | Health Records |
-|---|---|
-| Add Screenshot | Add Screenshot |
 
 ## ⚙️ 12 | Run Locally
 
