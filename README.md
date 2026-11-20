@@ -237,15 +237,6 @@ Computer Science & Engineering Student
 
 *Building technology that creates meaningful real-world impact.*
 
-## 🌟 15 | Support the Project
-
-If MEDICARE inspires you:
-
-- ⭐ Star this repository.
-- 🍴 Fork the project.
-- 🐛 Report issues.
-- 💡 Share suggestions.
-- 🤝 Contribute to improvements.
 
 ---
 
