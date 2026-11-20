@@ -228,15 +228,6 @@ To develop an intelligent, centralized, and user-friendly healthcare management 
 
 **K.R. Gowsalya**
 
-Computer Science & Engineering Student
-
-- 💻 Full Stack Development
-- 🤖 Artificial Intelligence & Machine Learning
-- 🌐 Web Application Development
-- 🚀 Innovative Problem Solving
-
-*Building technology that creates meaningful real-world impact.*
-
 
 ---
 
