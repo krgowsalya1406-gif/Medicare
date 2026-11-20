@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/MEDICARE-Smart%20Healthcare-0D9488?style=for-the-badge&logo=health&logoColor=white" />
-  <img src="https://img.shields.io/badge/Status-Active-success?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Status-Inactive-success?style=for-the-badge" />
   <img src="https://img.shields.io/badge/Platform-Web%20Application-blue?style=for-the-badge" />
 </p>
 
