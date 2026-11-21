@@ -115,14 +115,8 @@ MEDICARE aims to:
 - HTML5
 - CSS3
 - JavaScript
-- Font Awesome
 
-**Backend**
-- Python
-- Flask
 
-**Database**
-- MongoDB
 
 **Development Tools**
 - Visual Studio Code
