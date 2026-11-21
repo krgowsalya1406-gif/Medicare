@@ -13,7 +13,7 @@
 
 ---
 
-## 🌐 01 | Project Overview
+## 🌐  | Project Overview
 
 **MEDICARE** is an innovative digital healthcare management ecosystem that brings essential healthcare services into one intelligent platform.
 
