@@ -106,14 +106,7 @@ MEDICARE aims to:
                      |
               Frontend Layer
              HTML / CSS / JS
-                     |
-               Flask Backend
-                     |
-             Application Logic
-                     |
-                MongoDB
-                     |
-          Centralized Data Storage
+                     
 ```
 
 ## 🛠️ 07 | Technology & Tools
