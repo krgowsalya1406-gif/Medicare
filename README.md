@@ -176,29 +176,8 @@ Our future roadmap includes:
 
 
 
-## ⚙️ 12 | Run Locally
-
-Clone the repository:
-
-```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
-```
-
-Navigate into the project:
-
-```bash
-cd medicare
-```
 
 
-
-Open your browser and visit:
-
-```text
-http://127.0.0.1:5000/
-```
-
-*Install any additional dependencies required by your application.*
 
 ## 🎯 13 | Project Objective
 
