@@ -13,7 +13,7 @@
 
 ---
 
-## 🌐  | Project Overview
+## 🌐   Project Overview
 
 **MEDICARE** is an innovative digital healthcare management ecosystem that brings essential healthcare services into one intelligent platform.
 
@@ -23,7 +23,7 @@ From scheduling consultations to maintaining medical histories, the platform pro
 
 **One Platform. Multiple Healthcare Solutions. A Better Patient Experience.**
 
-## 💎 02 | Our Vision
+## 💎 Our Vision
 
 We believe healthcare management should be simple, accessible, and efficient.
 
@@ -35,7 +35,7 @@ MEDICARE aims to:
 - Encourage proactive health management.
 - Make essential healthcare services easier to access.
 
-## 🧩 03 | Smart Healthcare Ecosystem
+## 🧩  Smart Healthcare Ecosystem
 
 ### 👤 Patient Experience
 - Personalized patient dashboard.
@@ -62,7 +62,7 @@ MEDICARE aims to:
 - Healthcare service management.
 - Platform activity overview.
 
-## 🚀 04 | Advanced Features
+## 🚀 Advanced Features
 
 | Feature | Innovation |
 |---|---|
