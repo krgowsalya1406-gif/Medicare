@@ -190,17 +190,7 @@ Navigate into the project:
 cd medicare
 ```
 
-Install dependencies:
 
-```bash
-pip install flask pymongo
-```
-
-Start the application:
-
-```bash
-python app.py
-```
 
 Open your browser and visit:
 
