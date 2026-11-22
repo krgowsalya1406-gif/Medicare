@@ -13,7 +13,7 @@
 
 ---
 
-## 🌐   Project Overview
+## 🌐  Project Overview
 
 **MEDICARE** is an innovative digital healthcare management ecosystem that brings essential healthcare services into one intelligent platform.
 
@@ -79,7 +79,7 @@ MEDICARE aims to:
 
 *AI-generated guidance is informational and does not replace professional medical advice.*
 
-## 🔄 05 | How the Platform Works
+## 🔄 How the Platform Works
 
 **A connected healthcare journey:**
 
@@ -93,7 +93,7 @@ MEDICARE aims to:
 8. Medicine Reminders
 9. Health Activity Tracking
 
-## 🏗️ 06 | System Architecture
+## 🏗️ System Architecture
 
 ```text
              MEDICARE PLATFORM
@@ -123,7 +123,7 @@ MEDICARE aims to:
 - Git
 - GitHub
 
-## 🔐 08 | Security & Privacy
+## 🔐  Security & Privacy
 
 MEDICARE is designed with privacy-conscious healthcare management in mind.
 
@@ -135,7 +135,7 @@ MEDICARE is designed with privacy-conscious healthcare management in mind.
 
 *Production deployment should include appropriate encryption, access controls, backups, and healthcare data protection compliance.*
 
-## 📊 09 | Project Impact
+## 📊  Project Impact
 
 MEDICARE is designed to improve:
 
