@@ -1,5 +1,5 @@
 # 🏥 MEDICARE
-### The Future of Connected Healthcare Starts Here.
+### The Future of Connected Healthcare Starts Here. 
 
 <p align="center">
   <img src="https://readme-typing-svg.demolab.com?font=Poppins&weight=600&size=24&duration=3000&pause=1000&color=0D9488&center=true&vCenter=true&width=650&lines=Smart+Healthcare.+Simplified.;Your+Health%2C+One+Platform.;Connecting+Patients+%26+Doctors.;Technology+That+Cares." />
